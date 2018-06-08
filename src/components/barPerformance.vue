@@ -1,0 +1,103 @@
+<template>
+  <div ref="mychart" ></div>
+</template>
+<script>
+  import echarts from 'echarts';
+  import { extend, isNull } from 'underscore';
+
+  export default {
+    name: 'Echarts',
+    props: {
+      chartData: {
+        
+      }
+      // chartType: {
+      //   type: String,
+      //   require: false,
+      // },
+    },
+    data() {
+      return {
+        myChart: {},
+        opt: {
+          textStyle: {
+              color: "#fff"
+          },
+          color:["#6a9ad0","#de8244"],
+          tooltip: {
+              trigger: 'axis',
+              axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                  type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+              }
+          },
+          legend: {
+              data:[],
+              textStyle: {
+                color:"#fff"
+              }
+          },
+          grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              top:"10%",
+              containLabel: true
+          },
+          yAxis: {
+              type: 'value',
+              splitLine:{  
+          　　　　show:false  
+          　　 } 
+          },
+          xAxis: {
+              type: 'category',
+              data:[],
+              axisLine: { 
+                lineStyle: { 
+                  color : "#fff"
+                } 
+              }
+          },
+          series:[]
+        },
+      };
+    },
+    methods: {
+      setEchart() {
+
+        if (isNull(this.chartData)) {
+          this.myChart.showLoading();
+          return;
+        } else if (this.chartData === 'nodata') {
+          this.myChart.hideLoading();
+          return;
+        }
+
+        if (this.chartData.length == 0) {
+          this.myChart.showLoading();
+          return;
+        } 
+        this.myChart.hideLoading();
+        this.opt.legend.data = this.chartData.legend.data;
+        this.opt.xAxis.data = this.chartData.xAxis.data;
+        this.opt.series = this.chartData.series;
+        this.myChart.setOption(extend({}, this.opt));
+        this.myChart.resize();
+      },
+      handleWindowResize() {
+        this.myChart.resize();
+      },
+    },
+    watch: {
+      "chartData":"setEchart"
+    },
+    mounted() {
+      const dom = this.$refs.mychart;
+      this.myChart = echarts.init(dom);
+      window.addEventListener('resize', this.handleWindowResize);
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.handleWindowResize);
+    },
+  };
+</script>
