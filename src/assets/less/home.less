@@ -17,6 +17,40 @@ html,body,#div_body{
     }
 }
 
+
+.select_box{
+    min-height: 170px;
+    height: auto;
+    .select_box_item{
+        color: white;
+        margin-top: 20px;
+        margin-left: 20px;
+        float: left;
+        select{
+            overflow: hidden;
+            background: #313131;
+            color: white;
+            width: 300px !important;
+            option{
+                width: 300px !important;
+            }
+        }
+    }
+   
+}
+
+ .select_box:after{
+    content: "";
+    height:0;
+    line-height:0;
+    display:block;
+    visibility:hidden;
+    clear:both;
+}
+.select_box{
+    zoom:1;
+}
+
 .chart_box{
     height: 470px;
     margin-top: 30px;
@@ -46,7 +80,7 @@ html,body,#div_body{
         height: calc(100% - 55px);
         padding-top: 10px;
         .chart_box_chart_one{
-            width: 60%;
+            width: 70%;
             margin: 0 auto;
             height: 100%;
         }

@@ -1,0 +1,10 @@
+/*#test {
+  background: #313131;
+}
+*/
+.el-input__inner {
+  background: #313131 !important;
+  border-color: #fff !important;
+  color: #fff !important;
+  width:auto !important;
+}

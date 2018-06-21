@@ -71,7 +71,8 @@
           return;
         }
 
-        if (this.chartData.length == 0) {
+        if (this.chartData.legend.data.length == 0) {
+          this.myChart.clear();
           this.myChart.showLoading();
           return;
         } 
@@ -79,7 +80,6 @@
         this.opt.title.text = this.chartData.title;
         this.opt.legend.data = this.chartData.legend.data;
         this.opt.series[0].data = this.chartData.series.data;
-        console.log(this.opt)
         this.myChart.setOption(extend({}, this.opt));
         this.myChart.resize();
       },

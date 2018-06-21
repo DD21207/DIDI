@@ -59,6 +59,10 @@
                 lineStyle: { 
                   color : "#fff"
                 } 
+              },
+              axisLabel:{
+                interval:0,
+                rotate:50
               }
           },
           series:[]
@@ -68,7 +72,8 @@
     methods: {
       setEchart() {
 
-        if (isNull(this.chartData)) {
+        if (isNull(this.chartData.legend.data)) {
+          this.myChart.clear();
           this.myChart.showLoading();
           return;
         } else if (this.chartData === 'nodata') {
@@ -76,7 +81,8 @@
           return;
         }
 
-        if (this.chartData.length == 0) {
+        if (this.chartData.legend.data.length == 0) {
+          this.myChart.clear();
           this.myChart.showLoading();
           return;
         } 

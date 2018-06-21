@@ -56,6 +56,10 @@
                 lineStyle: { 
                   color : "#fff"
                 } 
+              },
+              axisLabel:{
+                interval:0,
+                rotate:50
               }
           },
           series:[]
@@ -73,7 +77,8 @@
           return;
         }
 
-        if (this.chartData.length == 0) {
+        if (this.chartData.legend.data.length == 0) {
+          this.myChart.clear();
           this.myChart.showLoading();
           return;
         } 
